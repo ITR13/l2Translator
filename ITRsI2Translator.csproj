@@ -1,0 +1,74 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <RunAnalyzersDuringBuild>False</RunAnalyzersDuringBuild>
+    <RunAnalyzersDuringLiveAnalysis>False</RunAnalyzersDuringLiveAnalysis>
+    <EnableNETAnalyzers>False</EnableNETAnalyzers>
+    <AnalysisLevel>none</AnalysisLevel>
+    <Configurations>MelonLoader;BepinEx</Configurations>
+    <RestoreAdditionalProjectSources>
+      https://api.nuget.org/v3/index.json;
+      https://nuget.bepinex.dev/v3/index.json;
+      https://nuget.samboy.dev/v3/index.json
+    </RestoreAdditionalProjectSources>
+    <RootNamespace>ITRsI2Translator</RootNamespace>
+    <Description>Universal translation mod for Unity Games that use I2 Localization</Description>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='MelonLoader|AnyCPU'">
+    <DefineConstants>$(DefineConstants);MelonLoader</DefineConstants>
+    <Optimize>True</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='BepinEx|AnyCPU'">
+    <DefineConstants>$(DefineConstants);BepInEx</DefineConstants>
+    <Optimize>True</Optimize>
+    <DebugType>none</DebugType>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Dependencies\**" />
+    <Compile Remove="ITRsI2Translator.Melon\**" />
+    <EmbeddedResource Remove="Dependencies\**" />
+    <EmbeddedResource Remove="ITRsI2Translator.Melon\**" />
+    <None Remove="Dependencies\**" />
+    <None Remove="ITRsI2Translator.Melon\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="I2Localization">
+      <HintPath>Dependencies\I2Localization.dll</HintPath>
+    </Reference>
+    <Reference Include="Il2CppI2Localization">
+      <HintPath>Dependencies\Il2CppI2Localization.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Il2CppInterop.Runtime">
+      <HintPath>Dependencies\Il2CppInterop.Runtime.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Il2Cppmscorlib">
+      <HintPath>Dependencies\Il2Cppmscorlib.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="MelonLoader">
+      <HintPath>Dependencies\MelonLoader.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEngine.CoreModule">
+      <HintPath>Dependencies\UnityEngine.CoreModule.dll</HintPath>
+      <Private>True</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
+    </Reference>
+    <PackageReference Include="BepInEx.Unity.Common" Version="6.0.0-be.668" />
+    <PackageReference Include="BepInEx.Unity.IL2CPP" Version="6.0.0-be.*" IncludeAssets="compile" />
+    <PackageReference Include="BepInEx.PluginInfoProps" Version="2.*" />
+  </ItemGroup>
+
+</Project>
